@@ -22,12 +22,18 @@ public class ControlCarrinho {
 	@RequestMapping("/excluir")
     public void excluir(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		int id = Integer.parseInt(request.getParameter("id"));
+		int lc = Integer.parseInt(request.getParameter("lc"));
 
 		List<Item> itens = (List<Item>) request.getSession().getAttribute("carrinho");
 		itens.remove(getItemById(itens, id));
 		request.getSession().setAttribute("carrinho", itens);
+		
+		if(lc == 0){
+			response.sendRedirect("/ProjDevstore/carrinho/compra");
+		}else{
+			response.sendRedirect("../");
+		}
 
-		response.sendRedirect("../");
     }
 	
 	private Item getItemById(List<Item> itens, int id) {
@@ -67,6 +73,11 @@ public class ControlCarrinho {
 		}else{
 			response.sendRedirect("../produto/pesquisa");
 		}
+    }
+	
+	@RequestMapping("/compra")
+    public ModelAndView realizarCompra(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		return new ModelAndView("realizar_compra");
     }
 	
 	

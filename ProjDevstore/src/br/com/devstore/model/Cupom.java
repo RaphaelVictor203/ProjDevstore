@@ -3,6 +3,8 @@ package br.com.devstore.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -17,6 +19,7 @@ public class Cupom {
 	private Vendedor vendedor;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
 	public int getIdCupom() {
 		return idCupom;
 	}

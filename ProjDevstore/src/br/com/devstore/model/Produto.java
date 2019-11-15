@@ -3,6 +3,8 @@ package br.com.devstore.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -20,8 +22,10 @@ public class Produto {
 	private Double preco;
 	private List<Feedback> feedbacks;
 	private List<Tag> tags;
+	private Vendedor vendedor;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
 	public int getIdProduto() {
 		return idProduto;
 	}
@@ -75,6 +79,14 @@ public class Produto {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	
+	@ManyToOne
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 	
 	

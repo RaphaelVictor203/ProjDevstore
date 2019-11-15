@@ -13,6 +13,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/RaphaelMendes/Desktop/documentação projeto ENG3/ProjDevstore-Raphael/WebContent/WEB-INF/lib/spring-context-5.1.9.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RaphaelMendes/git/ProjDevstore v3/ProjDevstore/WebContent/WEB-INF/lib/spring-context-5.1.9.RELEASE.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

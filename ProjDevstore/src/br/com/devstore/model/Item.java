@@ -1,6 +1,8 @@
 package br.com.devstore.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -12,6 +14,7 @@ public class Item {
 	private Produto produto;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
 	public int getIdItem() {
 		return idItem;
 	}
@@ -31,6 +34,10 @@ public class Item {
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	public double gtSubTotal(){
+		return (this.qntdProduto * this.produto.getPreco());
 	}
 	
 	

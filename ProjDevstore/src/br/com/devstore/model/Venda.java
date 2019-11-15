@@ -3,6 +3,8 @@ package br.com.devstore.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -14,10 +16,11 @@ public class Venda {
 	private Carrinho carrinho;
 	private Cliente cliente;
 	private Vendedor vendedor;
-	private Date dataValidade;
+	private Date dataVenda;
 	private String formaPagto;
 	
 	@Id 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
 	public int getIdVenda() {
 		return idVenda;
 	}
@@ -49,10 +52,10 @@ public class Venda {
 		this.vendedor = vendedor;
 	}
 	public Date getDataValidade() {
-		return dataValidade;
+		return dataVenda;
 	}
 	public void setDataValidade(Date dataValidade) {
-		this.dataValidade = dataValidade;
+		this.dataVenda = dataValidade;
 	}
 	public String getFormaPagto() {
 		return formaPagto;

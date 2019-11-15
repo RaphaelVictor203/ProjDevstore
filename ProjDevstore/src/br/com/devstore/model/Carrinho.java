@@ -47,6 +47,13 @@ public class Carrinho {
 		this.cliente = cliente;
 	}
 	
+	public double gtPrecoTotal(){
+		double preco = 0;
+		for(Item i : itens){
+			preco += i.gtSubTotal();
+		}
+		return preco;
+	}
 	
 	
 }

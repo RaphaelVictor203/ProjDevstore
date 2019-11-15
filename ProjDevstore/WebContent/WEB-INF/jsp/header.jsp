@@ -77,7 +77,7 @@
 			v = (Vendedor) session.getAttribute("usuarioLogado");
 			//session.setAttribute("login", v.get.getNomeUsuario());
 			//session.setAttribute("senha", v.getSenha());
-			session.setAttribute("dist", 50);
+			session.setAttribute("dist", 67);
 		}
 	}
 	
@@ -95,33 +95,24 @@
 	  <%if(isLogged){ %>
 	  <% if(session.getAttribute("tipoUsuario").toString().equals("vendedor")){ %>
 	  	<ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Produtos<span class="sr-only">(página atual)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Link</a>
-	      </li>
-	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Dropdown
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">Ação</a>
-	          <a class="dropdown-item" href="#">Outra ação</a>
-	          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#">Algo mais aqui</a>
-	        </div>
+	        <a class="nav-link" href="#">Cupons</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#">Desativado</a>
+	        <a class="nav-link" href="#">Pedidos</a>
 	      </li>
 	    </ul>
 	  <%}} %>
 	  <% if(isLogged){%>
 		  <div class="row" style="margin-left: ${dist}%">
+		  		<%if(session.getAttribute("tipoUsuario").toString().equals("cliente")){%>
 		  		<div class="col-6">
 		  			<input type="button" value="Carrinho" class="btn btn-outline-light btn-md w-100" data-toggle="modal" data-target="#ModalCarrinho"/>
 		  		</div>
+		  		 <%}%>
 		  		<div class="col-6">
 		  			<div class="dropdown w-50">
 						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -175,7 +166,7 @@
 				    	<h5 class="card-title"><%=i.getQntdProduto()%></h5>
 				    </div>
 					<div class="col">		    
-			    		<a href="/ProjDevstore/carrinho/excluir?id=<%=i.getIdItem()%>" class="btn btn-danger">Excluir</a>
+			    		<a href="/ProjDevstore/carrinho/excluir?id=<%=i.getIdItem()%>&lc=1" class="btn btn-danger">Excluir</a>
 			    	</div>
 			    </div>
 			  </div>
@@ -183,7 +174,7 @@
 		<%}%>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success w-100">Realizar compra</button>
+        <button type="button" onclick="location.href='/ProjDevstore/carrinho/compra'" class="btn btn-success w-100">Realizar compra</button>
       </div>
     </div>
   </div>

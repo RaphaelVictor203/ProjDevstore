@@ -1,6 +1,8 @@
 package br.com.devstore.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -11,6 +13,7 @@ public class Gerente {
 	private String senha;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
 	public int getIdGerente() {
 		return idGerente;
 	}
