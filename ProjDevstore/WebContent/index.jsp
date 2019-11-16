@@ -110,7 +110,7 @@
 		<div class="row-12">
 			<strong><h4 class="card-title mt-5 text-dark">Produtos em destaque</h4></strong>
 		</div>
-		<div class="d-flex row-12 justify-content-between" style="flex-wrap: wrap;">
+		<div class="d-flex row-12" style="flex-wrap: wrap; padding-left: .1em">
 		
 			<% 
 				if(produtoList.size() > 0){
@@ -118,7 +118,7 @@
 							request.setAttribute("nomeProduto", pr.getNomeProduto());
 							//request.setAttribute("fabricante", pr.getFabricante());
 							request.setAttribute("preco", pr.getPreco());%>
-						<div class="card mb-3" style="width: 17rem; float: left;">
+						<div class="card mb-3" style="width: 17rem; float: left; margin-left: .30em">
 						  <img class="card-img-top" src=".../100px180/" alt=" " style="width: 100%; height: 18em; background-color: gray">
 						  <div class="card-body">
 						  	<div class="row mb-1">
