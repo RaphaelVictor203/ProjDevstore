@@ -1,6 +1,8 @@
 package br.com.devstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +41,6 @@ public class Item {
 	public double gtSubTotal(){
 		return (this.qntdProduto * this.produto.getPreco());
 	}
-	
-	
 	
 	
 }

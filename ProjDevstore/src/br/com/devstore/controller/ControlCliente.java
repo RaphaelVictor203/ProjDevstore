@@ -48,9 +48,9 @@ public class ControlCliente extends HttpServlet{
 				c.setNomeCompleto(request.getParameter("txtNomeCompleto"));
 				c.setNomeUsuario(request.getParameter("txtUsuario"));
 				c.setSenha(request.getParameter("txtSenha"));
-				c.setCPF(Integer.parseInt(request.getParameter("txtCPF")));
+				c.setCPF(request.getParameter("txtCPF"));
 				c.setEmail(request.getParameter("txtEmail"));
-				c.setTelefone(Integer.parseInt(request.getParameter("txtTelefone")));
+				c.setTelefone(Long.parseLong(request.getParameter("txtTelefone")));
 				
 				Endereco e = new Endereco();
 				
@@ -96,7 +96,7 @@ public class ControlCliente extends HttpServlet{
 			c.setNomeCompleto(request.getParameter("txtNomeCompleto"));
 			c.setNomeUsuario(request.getParameter("txtUsuario"));
 			c.setSenha(request.getParameter("txtSenha"));
-			c.setCPF(Integer.parseInt(request.getParameter("txtCPF")));
+			c.setCPF(request.getParameter("txtCPF"));
 			c.setEmail(request.getParameter("txtEmail"));
 			c.setTelefone(Integer.parseInt(request.getParameter("txtTelefone")));
 			

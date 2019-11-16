@@ -120,7 +120,7 @@
 					<div class="col-6">
 					</div>
 					<div class="col-6" style="padding-left: 2em; padding-right: 2em;">
-					<form>
+					<form action="/ProjDevstore/carrinho/realizarCompra" method="POST">
 						<div class="row">
 							<h5 class="card-title text-secondary">Forma de pagamento</h5>
 						</div>

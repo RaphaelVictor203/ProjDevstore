@@ -1,23 +1,28 @@
 package br.com.devstore.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Venda {
 
 	private int idVenda;
-	private Carrinho carrinho;
+	private List<Item> itens;
 	private Cliente cliente;
-	private Vendedor vendedor;
 	private Date dataVenda;
 	private String formaPagto;
+	private boolean status;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
@@ -28,12 +33,12 @@ public class Venda {
 		this.idVenda = idVenda;
 	}
 	
-	@OneToOne
-	public Carrinho getCarrinho() {
-		return carrinho;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	public List<Item> getItens() {
+		return itens;
 	}
-	public void setCarrinho(Carrinho carrinho) {
-		this.carrinho = carrinho;
+	public void setItens(List<Item> items) {
+		this.itens = items;
 	}
 	
 	@ManyToOne
@@ -44,13 +49,6 @@ public class Venda {
 		this.cliente = cliente;
 	}
 	
-	@ManyToOne
-	public Vendedor getVendedor() {
-		return vendedor;
-	}
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
-	}
 	public Date getDataValidade() {
 		return dataVenda;
 	}
@@ -62,6 +60,12 @@ public class Venda {
 	}
 	public void setFormaPagto(String formaPagto) {
 		this.formaPagto = formaPagto;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	

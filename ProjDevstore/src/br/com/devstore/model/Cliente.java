@@ -25,9 +25,9 @@ public class Cliente {
 	private String nomeCompleto;
 	private String nomeUsuario;
 	private String senha;
-	private int CPF;
+	private String CPF;
 	private String email;
-	private int telefone;
+	private long telefone;
 	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Endereco.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
@@ -58,10 +58,10 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(int cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
 	public String getEmail() {
@@ -70,10 +70,10 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTelefone() {
+	public long getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(long telefone) {
 		this.telefone = telefone;
 	}
 	

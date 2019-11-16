@@ -156,7 +156,7 @@
       			//request.getSession().setAttribute("nomeItem", i.getProduto().getNomeProduto());
       			//request.getSession().setAttribute("qntdItem", i.getQntdProduto());
       		%>
-	       	<div class="card w-100 mb-1" style="width: 18rem;">
+	       	<div class="card w-100 mb-1 " style="width: 18rem;">
 			  <div class="card-body">
 			  	<div class="row">
 				  	<div class="col-6">
@@ -166,7 +166,7 @@
 				    	<h5 class="card-title"><%=i.getQntdProduto()%></h5>
 				    </div>
 					<div class="col">		    
-			    		<a href="/ProjDevstore/carrinho/excluir?id=<%=i.getIdItem()%>&lc=1" class="btn btn-danger">Excluir</a>
+			    		<a href="/ProjDevstore/carrinho/excluir?id=<%=i.getProduto().getIdProduto()%>&lc=1" class="btn btn-danger">Excluir</a>
 			    	</div>
 			    </div>
 			  </div>
