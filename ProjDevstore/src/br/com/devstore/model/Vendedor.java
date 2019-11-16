@@ -11,11 +11,11 @@ public class Vendedor {
 	private int idVendedor;
 	private String nomeCompleto;
 	private String razaoSocial;
-	private int CNPJ;
+	private String CNPJ;
 	//private Licenca licenca;
-	private int telefone;
+	private Long telefone;
 	private String email;
-	private int CPF;
+	private String CPF;
 	private Endereco endereco;
 	private boolean isRequisit;
 	
@@ -38,11 +38,11 @@ public class Vendedor {
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-	public int getCNPJ() {
+	public String getCNPJ() {
 		return CNPJ;
 	}
-	public void setCNPJ(int cNPJ) {
-		CNPJ = cNPJ;
+	public void setCNPJ(String string) {
+		CNPJ = string;
 	}
 	
 	/*
@@ -53,10 +53,10 @@ public class Vendedor {
 	public void setLicenca(Licenca licenca) {
 		this.licenca = licenca;
 	}*/
-	public int getTelefone() {
+	public Long getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
 	public String getEmail() {
@@ -65,10 +65,10 @@ public class Vendedor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(int cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
 	

@@ -21,6 +21,7 @@ import br.com.devstore.model.Cidade;
 import br.com.devstore.model.Cliente;
 import br.com.devstore.model.Endereco;
 import br.com.devstore.model.Estado;
+import br.com.devstore.model.Licenca;
 import br.com.devstore.model.Vendedor;
 
 @Controller
@@ -83,12 +84,14 @@ public class ControlLogin {
 				}				
 			}else{
 				vDao = new VendedorDAOImpl();
-				Vendedor v = vDao.login(request.getParameter("usr"),
+				Licenca l = vDao.login(request.getParameter("usr"),
 						request.getParameter("pass"));
+				Vendedor v = l.getVendedor();
 				if(v != null){
 					//request.getSession().setAttribute("teste", "vendedor");
 					session.setAttribute("usuarioLogado", v);
 					session.setAttribute("tipoUsuario", "vendedor");
+					session.setAttribute("licenca", l);
 					response.sendRedirect("../vendedor/");
 				}else{
 					response.sendRedirect("./log?tp=1&tpl=1");

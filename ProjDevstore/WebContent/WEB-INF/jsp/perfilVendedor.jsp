@@ -1,3 +1,10 @@
+<%@page import="br.com.devstore.model.Vendedor"%>
+<%@page import="br.com.devstore.model.Licenca"%>
+<%@page import="br.com.devstore.model.Cidade"%>
+<%@page import="br.com.devstore.model.Estado"%>
+<%@page import="br.com.devstore.model.Endereco"%>
+<%@page import="br.com.devstore.dao.VendedorDAOImpl"%>
+<%@page import="br.com.devstore.dao.VendedorDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,6 +23,34 @@ body {
 }
 </style>
 </head>
+
+<%
+
+	VendedorDAO vDAO = new VendedorDAOImpl();
+
+	Licenca l = new Licenca();
+	Vendedor v = new Vendedor();
+	
+	l = vDAO.login(request.getParameter("usr").toString(), request.getParameter("senha").toString());
+	
+	v = l.getVendedor();
+	
+	Endereco end = v.getEndereco();
+	
+	Estado est = end.getEstado();
+	
+	Cidade cid = end.getCidade();
+	
+	session.setAttribute("nomeCidade", cid.getNomeCidade());
+	session.setAttribute("nomeEstado", est.getNomeEstado());
+	
+	request.setAttribute("idVendedor", v.getIdVendedor());
+	request.setAttribute("idEstado", v.getEndereco().getEstado().getIdEstado());
+	request.setAttribute("idCidade", v.getEndereco().getCidade().getIdCidade());
+	request.setAttribute("idEndereco", v.getEndereco().getIdEndereco());
+
+%>
+
 <body>
 	<jsp:include page="header.jsp" />
 	<br>
@@ -26,36 +61,36 @@ body {
 			</strong>
 			<div class="card-body rounded bg-white"
 				style="background-color: #F0FFF0">
-				<form id="formPerfilVendedor" action="" method="post">
+				<form id="formPerfilVendedor" action="./atualizar?idv=${idVendedor}&ide=${idEndereco}&idcd=${idCidade}&ides=${idEstado}" method="post">
 					<div class="row mb-2">
 						<div class=col-8>
 							<input type="text" class="form-control" name="txtNomeCompleto"
-								placeholder="Digite Seu Nome Completo*" />
+								placeholder="Digite Seu Nome Completo*" value="<%= v.getNomeCompleto()%>"/>
 						</div>
 						<div class=col-4>
 							<input type=text class="form-control" name="txtCPF"
-								placeholder="Digite o seu CPF*" />
+								placeholder="Digite o seu CPF*" value="<%= v.getCPF()%>"/>
 						</div>
 					</div>
 					<div class="row mb-2">
 						<div class="col-8">
 							<input type="text" class="form-control" name="txtRazaoSocial"
-								placeholder="Digite a sua Razão Social*" />
+								placeholder="Digite a sua Razão Social*" value="<%= v.getRazaoSocial()%>"/>
 						</div>
 						<div class="col-4">
 							<input type="text" class="form-control" name="txtCNPJ"
-								placeholder="Digite o CNPJ*" />
+								placeholder="Digite o CNPJ*" value="<%= v.getCNPJ()%>"/>
 						</div>
 					</div>
 					<div class="row mb-5">
 						<div class="col-8">
 							<input type="text" class="form-control" name="txtEmail"
-								placeholder="Digite o seu email*" />
+								placeholder="Digite o seu email*" value="<%= v.getEmail()%>"/>
 						</div>
 
 						<div class="col-4">
 							<input type="text" class="form-control" name="txtTelefone"
-								placeholder="Digite o seu numero de telefone*" />
+								placeholder="Digite o seu numero de telefone*" value="<%= v.getTelefone()%>"/>
 						</div>
 					</div>
 					<hr />
@@ -94,20 +129,20 @@ body {
 							</select>
 						</div>
 						<div class="col">
-							<select id="cidade" class="form-control" name="cmbCidade">
+							<select id="cidade" class="form-control" name="cmbCidade" >
 								<option value=-1 disabled selected>Cidade</option>
-								<option value="ANY">Anywhare</option>
+								<option value="São Paulo">São Paulo</option>
 							</select>
 						</div>
 
 						<div class="col-6">
 							<input type="text" class="form-control" name="txtLogradouro"
-								placeholder="Digite o seu Logradouro*" />
+								placeholder="Digite o seu Logradouro*" value="<%= end.getEndereco()%>"/>
 						</div>
 
 						<div class="col">
 							<input type="text" class="form-control" name="txtCEP"
-								placeholder="Digite o seu CEP* " />
+								placeholder="Digite o seu CEP* " value="<%= end.getCEP()%>"/>
 						</div>
 					</div>
 					<div class="row mb-5">
@@ -121,4 +156,14 @@ body {
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript">
+	(function (){
+		
+		document.getElementById("estado").value = "${nomeEstado}";
+		document.getElementById("cidade").value = "${nomeCidade}";
+		
+	})();
+</script>
+
 </html>

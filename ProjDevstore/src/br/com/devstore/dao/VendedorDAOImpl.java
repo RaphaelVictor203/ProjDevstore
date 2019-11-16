@@ -18,11 +18,11 @@ public class VendedorDAOImpl implements VendedorDAO {
 	}
 	
 	@Override
-	public Vendedor login(String usuario, String senha) {
+	public Licenca login(String usuario, String senha) {
 
 		System.out.println("User: " + usuario + " - Senha: " + senha);
 
-		Vendedor v = null;
+		//Vendedor v = null;
 		
 		Licenca l = null;
 
@@ -34,11 +34,29 @@ public class VendedorDAOImpl implements VendedorDAO {
 		query.setParameter("senha", senha);
 		if (query.getResultList().size() >= 1) {
 			l = (Licenca) query.getResultList().get(0);
-			v = l.getVendedor();
-			System.out.println("Vendedor capturado: " + v.getNomeCompleto());
+			//v = l.getVendedor();
+			//System.out.println("Vendedor capturado: " + v.getNomeCompleto());
 		}
 
-		return v;
+		return l;
+	}
+	
+	@Override
+	public boolean alterar(Vendedor vendedor) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			
+			em.getTransaction().begin();
+			em.merge(vendedor);
+			em.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.getStackTrace();
+			em.getTransaction().rollback();
+		}finally{
+			em.close();				
+		}
+		return false;
 	}
 
 }
