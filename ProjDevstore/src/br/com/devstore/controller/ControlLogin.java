@@ -48,6 +48,7 @@ public class ControlLogin {
 		request.getSession().removeAttribute("usuarioLogado");
 		request.getSession().removeAttribute("tipoUsuario");
 		request.getSession().removeAttribute("carrinho");
+		request.getSession().removeAttribute("cupons");
 		
 		return new ModelAndView("login");
     }

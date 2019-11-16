@@ -62,8 +62,10 @@ public class Item {
 	}
 	
 	public void aplicarCupom(double porcentagemCupom){
-		this.subTotal = this.subTotal * (porcentagemCupom/100);
-		this.cupomUtil = true;
+		if(!this.cupomUtil){
+			this.subTotal = this.subTotal - (this.subTotal * (porcentagemCupom/100));
+			this.cupomUtil = true;
+		}
 	}
 	
 	

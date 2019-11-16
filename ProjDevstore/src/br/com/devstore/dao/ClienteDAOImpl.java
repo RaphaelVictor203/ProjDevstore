@@ -71,7 +71,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	public Cliente login(String user, String senha) {
 		
-		System.out.println("User: " + user + " - Senha: " + senha);
+		//System.out.println("User: " + user + " - Senha: " + senha);
 		
 		Cliente c = null;
 		

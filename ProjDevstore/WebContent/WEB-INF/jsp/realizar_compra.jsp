@@ -1,3 +1,5 @@
+<%@page import="br.com.devstore.controller.ControlCarrinho"%>
+<%@page import="br.com.devstore.model.Cupom"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="br.com.devstore.model.Carrinho"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,9 +19,14 @@
 </head>
 
 <%
+
+	List<Cupom> cuponsList = new ArrayList<Cupom>();
+
 	List<Item> itemList = new ArrayList<Item>();
 	
 	Carrinho c = new Carrinho();
+	
+	ControlCarrinho cc = new ControlCarrinho();
 	
 	NumberFormat nf = NumberFormat.getInstance();
 
@@ -29,6 +36,18 @@
 	if(session.getAttribute("carrinho") != null){
 		itemList = (List<Item>) session.getAttribute("carrinho");
 		c.setItens(itemList);
+		
+		if(session.getAttribute("cupons") != null){
+			cuponsList = (List<Cupom>) session.getAttribute("cupons");
+			
+			List<Item> items = (List<Item>) session.getAttribute("carrinho");
+			items = cc.aplicarCupom(cuponsList, itemList);
+			
+			session.setAttribute("carrinho", items);
+		}else{
+			session.setAttribute("cupons", cuponsList);		
+		}
+		
 	}else{
 		/*Item i1 = new Item();
 		i1.setIdItem(0);
@@ -67,6 +86,7 @@
 		session.setAttribute("carrinho", itemList);
 		c.setItens(itemList);
 	}
+	
 %>
 
 <body style="background-color: #F5F5F5">
@@ -81,7 +101,7 @@
 			<div class="card-body rounded bg-white"
 				style="background-color: #FFFAFA; margin-bottom: 10em">
 				<strong><h5 class="card-title text-secondary">Itens do carrinho</h5></strong>
-				<div class="bg-light rounded mb-1" style="height: 20em; overflow: auto;">
+				<div class="bg-light rounded mb-1 border border-secondary" style="height: 20em; overflow: auto;">
 					<%
 						for(Item i : itemList){
 						      			//session.setAttribute("item", i);
@@ -117,7 +137,42 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-6">
+					<div class="col-6 border-right">
+						<div class="row">
+							<h5 class="card-title text-secondary ml-3">Cupons de desconto</h5>
+						</div>
+						<form action="./aplCupom" method="POST">
+							<div class="row">
+								<div class="col">
+									<input type="text" class="form-control" name="codCupom" placeholder="Insira o código do cupom"/>
+								</div>
+								<div class="col">
+									<input type="submit" class="btn btn-primary w-100" value="Aplicar cupom"/>
+								</div>							
+							</div>
+						</form>
+						
+						<div class="bg-light rounded mb-1 mt-2 border border-secondary" style="height: 74%; overflow: auto;">
+							<%
+								for(Cupom cp : cuponsList){
+							%>
+							<div class="card w-100 mb-1">
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title text-left">Cod. Cupom: <%=cp.getCodigoCupom()%></h5>
+										</div>
+										<div class="col">
+											<h5 class="card-title text-left">Qntd Desconto: <%=cp.getQntdDesconto()%></h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<%
+								}
+							%>
+						</div>
+						
 					</div>
 					<div class="col-6" style="padding-left: 2em; padding-right: 2em;">
 					<form action="/ProjDevstore/carrinho/realizarCompra" method="POST">

@@ -1,6 +1,7 @@
 package br.com.devstore.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,12 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.devstore.dao.CupomDAO;
+import br.com.devstore.dao.CupomDAOImpl;
 import br.com.devstore.dao.ProdutoDAO;
 import br.com.devstore.dao.ProdutoDAOImpl;
 import br.com.devstore.dao.VendaDAO;
 import br.com.devstore.dao.VendaDAOImpl;
 import br.com.devstore.model.Carrinho;
 import br.com.devstore.model.Cliente;
+import br.com.devstore.model.Cupom;
 import br.com.devstore.model.Item;
 import br.com.devstore.model.Produto;
 import br.com.devstore.model.Venda;
@@ -116,10 +120,49 @@ public class ControlCarrinho {
 		
 		vDAO.inserir(v);
 		request.getSession().setAttribute("carrinho", null);
+		request.getSession().setAttribute("cupons", null);
 		
 		response.sendRedirect("./compra");
 		//return new ModelAndView("realizar_compra");
     }
 	
+	@RequestMapping("/aplCupom")
+    public ModelAndView aplCupom(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		CupomDAO cDAO = new CupomDAOImpl();
+		String codCupom = request.getParameter("codCupom");
+		Cupom c = cDAO.pesquisar(codCupom);
+		
+		List<Cupom> itens = (List<Cupom>) request.getSession().getAttribute("cupons");
+		if(!cupomExist(c, itens)){
+			itens.add(c);
+			request.getSession().setAttribute("cupons", itens);
+		}
+		
+		return new ModelAndView("realizar_compra");
+    }
+	
+	public List<Item> aplicarCupom(List<Cupom> cupons, List<Item> itensList){
+		
+		for(Cupom c : cupons){
+			for(Item i : itensList){
+				if(c.getVendedor().getIdVendedor() == i.getProduto().getVendedor().getIdVendedor()){
+					i.aplicarCupom(c.getQntdDesconto());
+				}
+			}
+		}
+		
+		return itensList;
+		
+	}
+	
+	private boolean cupomExist(Cupom c, List<Cupom> cupons){
+		for(Cupom cp : cupons){
+			if(cp.getIdCupom() == c.getIdCupom()){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
