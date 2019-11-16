@@ -63,7 +63,7 @@
 	<!-- conteudo -->
 	<div class="container">
 		<div class="row-12 mb-5">
-			<div id="carousel" class="carousel slide" data-ride="carousel" style="background-color: red; height: 26em;">
+			<div id="carousel" class="carousel slide bg-secondary" data-ride="carousel" style="height: 26em;">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
 			      <img class="d-block w-100 h-100" src=".../800x400?auto=yes&bg=777&fg=555&text=Primeiro Slide" alt="Primeiro Slide">
