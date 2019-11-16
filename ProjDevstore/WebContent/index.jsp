@@ -138,6 +138,7 @@
 						    <div class="row">
 						    	<div class="col">
 						    		<div class="input-group">
+						    		
 						    		  <form action="/ProjDevstore/carrinho/adicionar?id=<%= pr.getIdProduto() %>&lc=0" method="POST">
 						    		  	<div class="row">
 						    		  		<div class="w-50 pl-3">

@@ -31,5 +31,14 @@ public class ControlVendedor {
 		return new ModelAndView("cadastro_vendedor");
 		
     }
+	
+	@RequestMapping("/perfil")
+    public ModelAndView perfil(HttpServletRequest request, HttpServletResponse response){
+		
+		return new ModelAndView("perfilVendedor");
+		
+    }
+	
+	
 
 }
