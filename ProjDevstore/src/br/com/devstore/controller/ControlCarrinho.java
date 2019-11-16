@@ -115,6 +115,7 @@ public class ControlCarrinho {
 		v.setDataValidade(cal.getTime());
 		
 		vDAO.inserir(v);
+		request.getSession().setAttribute("carrinho", null);
 		
 		response.sendRedirect("./compra");
 		//return new ModelAndView("realizar_compra");

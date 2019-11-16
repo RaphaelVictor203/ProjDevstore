@@ -117,10 +117,14 @@
 						    	<div class="col">
 						    		<div class="input-group">
 						    		  <form action="/ProjDevstore/carrinho/adicionar?id=<%= pr.getIdProduto() %>&lc=1" method="POST">
-										  <input type="text" class="form-control" name="qntdProd" id="qntdProd" placeholder="Quantidade"/>
-										  <div class="input-group-append">
-										    <input type="submit" class="btn btn-success mt-auto" value="Adicionar"/>
-										  </div>
+										  <div class="row">
+						    		  		<div class="w-50 pl-3">
+										  		<input type="text" class="form-control w-100" name="qntdProd" id="qntdProd" placeholder="Quantidade"/>
+										  	</div>
+										  	<div class="w-50 pr-3 pl-1">
+											    <input type="submit" class="btn btn-success w-100" value="Adicionar"/>
+										  	</div>
+										</div>
 									  </form>
 									</div>
 								</div>

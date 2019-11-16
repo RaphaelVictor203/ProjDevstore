@@ -133,10 +133,15 @@
 						    	<div class="col">
 						    		<div class="input-group">
 						    		  <form action="/ProjDevstore/carrinho/adicionar?id=<%= pr.getIdProduto() %>&lc=0" method="POST">
-										  <input type="text" class="form-control" name="qntdProd" id="qntdProd" placeholder="Quantidade"/>
-										  <div class="input-group-append">
-										    <input type="submit" class="btn btn-success mt-auto" value="Adicionar"/>
-										  </div>
+						    		  	<div class="row">
+						    		  		<div class="w-50 pl-3">
+										  		<input type="text" class="form-control w-100" name="qntdProd" id="qntdProd" placeholder="Quantidade"/>
+										  	</div>
+										  	<div class="w-50 pr-3 pl-1">
+											    <input type="submit" class="btn btn-success w-100" value="Adicionar"/>
+										  	</div>
+										</div>
+										<!-- Three values - border-radius: 15px 50px 30px; (first value applies to top-left corner, second value applies to top-right and bottom-left corners, and third value applies to bottom-right corner) -->
 									  </form>
 									</div>
 								</div>
