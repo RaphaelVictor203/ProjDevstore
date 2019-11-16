@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Set"%>
 <%@page import="br.com.devstore.dao.ProdutoDAOImpl"%>
 <%@page import="br.com.devstore.dao.ProdutoDAO"%>
@@ -15,6 +16,11 @@
 </head>
 
 <%
+
+	NumberFormat nf = NumberFormat.getInstance();
+	
+	nf.setMaximumFractionDigits(2);
+	nf.setMinimumFractionDigits(2);
 
 	ProdutoDAO pDAO = new ProdutoDAOImpl();
 	List<Produto> produtoList = new ArrayList<Produto>();
@@ -110,7 +116,7 @@
 						    		<a href="#"><h5 class="card-title">${nomeProduto}</h5></a>
 						    	</div>
 						    	<div class="col">
-						    		<h5 class="card-text text-secondary text-right">R$ ${preco}0</h5>
+						    		<h5 class="card-text text-secondary text-right">R$ <%= nf.format(pr.getPreco()) %></h5>
 						    	</div>
 						    </div>
 						    <div class="row">
