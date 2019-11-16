@@ -14,6 +14,8 @@ public class Item {
 	private int idItem;
 	private int qntdProduto;
 	private Produto produto;
+	private boolean cupomUtil;
+	private double subTotal = -1;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
@@ -39,7 +41,29 @@ public class Item {
 	}
 	
 	public double gtSubTotal(){
-		return (this.qntdProduto * this.produto.getPreco());
+		if(this.subTotal == -1){
+			this.subTotal = (this.qntdProduto * this.produto.getPreco());
+			return this.subTotal;
+		}else{
+			return this.subTotal;
+		}
+	}
+	public boolean isCupomUtil() {
+		return cupomUtil;
+	}
+	public void setCupomUtil(boolean cupomUtil) {
+		this.cupomUtil = cupomUtil;
+	}
+	public double getSubTotal() {
+		return subTotal;
+	}
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
+	
+	public void aplicarCupom(double porcentagemCupom){
+		this.subTotal = this.subTotal * (porcentagemCupom/100);
+		this.cupomUtil = true;
 	}
 	
 	
