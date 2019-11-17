@@ -116,7 +116,7 @@ public class ControlCarrinho {
 
 		Calendar cal = GregorianCalendar.getInstance();
 		
-		v.setDataValidade(cal.getTime());
+		v.setDataVenda(cal.getTime());
 		
 		vDAO.inserir(v);
 		request.getSession().setAttribute("carrinho", null);

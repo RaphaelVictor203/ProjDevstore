@@ -16,12 +16,15 @@ import br.com.devstore.dao.ClienteDAO;
 import br.com.devstore.dao.ClienteDAOImpl;
 import br.com.devstore.dao.ProdutoDAO;
 import br.com.devstore.dao.ProdutoDAOImpl;
+import br.com.devstore.dao.VendaDAO;
+import br.com.devstore.dao.VendaDAOImpl;
 import br.com.devstore.dao.VendedorDAO;
 import br.com.devstore.dao.VendedorDAOImpl;
 import br.com.devstore.model.Cidade;
 import br.com.devstore.model.Cliente;
 import br.com.devstore.model.Endereco;
 import br.com.devstore.model.Estado;
+import br.com.devstore.model.Item;
 import br.com.devstore.model.Produto;
 import br.com.devstore.model.Vendedor;
 
@@ -47,6 +50,38 @@ public class ControlVendedor {
     public ModelAndView perfil(HttpServletRequest request, HttpServletResponse response){
 		
 		return new ModelAndView("perfilVendedor");
+		
+    }
+	
+	@RequestMapping("/listarVenda")
+	public ModelAndView itensVenda(HttpServletRequest request, HttpServletResponse response){
+		
+		VendaDAO vDAO =  new VendaDAOImpl();
+		
+		int id =  Integer.parseInt(request.getParameter("id"));
+		
+		List<Item> listaItens = vDAO.getItensByIdVenda(id);
+		
+		request.getSession().setAttribute("itensVenda", listaItens);
+		
+		request.getSession().setAttribute("idVenda", id);
+		
+		return new ModelAndView("tela_vendedor");
+		
+    }
+	
+	@RequestMapping("/confirmarVenda")
+	public ModelAndView confirmarVenda(HttpServletRequest request, HttpServletResponse response){
+		
+		VendaDAO vDAO =  new VendaDAOImpl();
+		
+		int id =  Integer.parseInt(request.getParameter("id"));
+		
+		vDAO.confirmarVenda(id);
+		
+		request.getSession().setAttribute("itensVenda", null);
+		
+		return new ModelAndView("tela_vendedor");
 		
     }
 	
