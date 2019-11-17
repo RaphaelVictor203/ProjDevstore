@@ -37,42 +37,13 @@
 					</div>
 					<div class="row mb-3">
 						<div class="col">
-							<input type="submit" value="Ativar Licenca" class="btn btn-success btn-lg w-100"/>
+							<input type="submit" value="Ativar Licenca" class="btn btn-success btn-lg w-100" />
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
-	<!-- Modal Esqueci minha senha  -->
-
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Recuperação de senha</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         
-         <form>
-		  <div class="form-group">
-		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu CPF/CNPJ">
-		  </div>
-		  <button type="submit" class="btn btn-success btn-lg btn-block" data-dismiss="modal">Enviar</button>
-        </form> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn  btn-danger" data-dismiss="modal">Voltar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal -->	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

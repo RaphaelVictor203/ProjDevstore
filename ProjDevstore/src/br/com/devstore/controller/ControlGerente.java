@@ -33,6 +33,30 @@ public class ControlGerente {
         return new ModelAndView("ativar_vendedor");
     }
 	
+	@RequestMapping("/excluirLic")
+	public ModelAndView excluirLic(HttpServletRequest request, HttpServletResponse response){
+		
+		System.out.println("Teste ID: " + request.getParameter("id"));
+		
+		VendedorDAO vDAO = new VendedorDAOImpl();
+		
+		Vendedor v = vDAO.getById(Integer.parseInt(request.getParameter("id")));
+		
+		v.setRequisit(0);
+		
+		vDAO.alterar(v);
+		
+		LicencaDAO lDAO = new LicencaDAOImpl();
+		
+		Licenca l = lDAO.getByIdVendedor(Integer.parseInt(request.getParameter("id")));
+		
+		lDAO.excluir(l);
+		
+		
+        return new ModelAndView("tela_gerente");
+    }
+	
+	
 	@RequestMapping("/ativar")
 	public ModelAndView ativar(HttpServletRequest request, HttpServletResponse response){
 		

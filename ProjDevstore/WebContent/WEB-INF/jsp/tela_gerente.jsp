@@ -50,7 +50,7 @@
 									<a href="#"
 										class="btn btn-info" style="float: right">Info.</a>
 									<a onclick="location.href='/ProjDevstore/gerente/ativarVend?id=<%= v.getIdVendedor() %>&idg=<%= 1 %>'"
-										class="btn btn-success mr-3" style="float: right" data-toggle="modal" data-target="#licencaModal" 
+										class="btn btn-success mr-3" style="float: right" 
 										>Ativar Licenca</a>
 								</div>
 							</div>
@@ -72,7 +72,7 @@
 									<h5 class="card-title text-left">Razão Social: <%= v.getRazaoSocial() %></h5>
 								</div>
 								<div class="col">
-									<a href="#"
+									<a onclick="location.href='/ProjDevstore/gerente/excluirLic?id=<%= v.getIdVendedor() %>'"
 										class="btn btn-danger mr-3" style="float: right">Excluir Licenca</a>
 								</div>
 							</div>
