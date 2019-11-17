@@ -1,5 +1,9 @@
 package br.com.devstore.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -52,7 +56,7 @@ public class LicencaDAOImpl implements LicencaDAO{
 
 	@Override
 	public boolean excluir(Licenca l) {
-		try {
+		/*try {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.remove(l);
@@ -61,6 +65,20 @@ public class LicencaDAOImpl implements LicencaDAO{
 			return true;
 		} catch (Exception e) {
 			e.getStackTrace();
+		}
+		return false;*/
+		try {
+			Connection con = ConnectionManager.getInstance().getConnection();
+			/*String sql = "delete from licenca "
+					+ " where idLicenca=?";*/
+			String query = "{call proc_remove_licenca(?)}";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setLong(1, l.getIdLicenca());
+			stmt.executeUpdate();
+			con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
