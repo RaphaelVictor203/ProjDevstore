@@ -105,10 +105,18 @@
 	        <a class="nav-link" href="#">Cupons</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Pedidos</a>
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor?tl=1'">Pedidos</a>
 	      </li>
 	    </ul>
-	  <%}} %>
+	  <%}else
+	  if(session.getAttribute("tipoUsuario").toString().equals("gerente")){%>
+		<ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Licencas<span class="sr-only">(página atual)</span></a>
+	      </li>
+	    </ul> 
+	  <%} 
+	  }%>
 	  <% if(isLogged){%>
 		  <div class="row" style="margin-left: ${dist}%">
 		  		<%if(session.getAttribute("tipoUsuario").toString().equals("cliente")){%>

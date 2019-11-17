@@ -29,7 +29,7 @@ import br.com.devstore.model.Vendedor;
 @RequestMapping("/vendedor")
 public class ControlVendedor {
 	
-	@RequestMapping("/")
+	@RequestMapping("")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
 		
 		return new ModelAndView("tela_vendedor");

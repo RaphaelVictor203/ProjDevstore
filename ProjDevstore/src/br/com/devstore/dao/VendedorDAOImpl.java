@@ -1,5 +1,8 @@
 package br.com.devstore.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -57,6 +60,57 @@ public class VendedorDAOImpl implements VendedorDAO {
 			em.close();				
 		}
 		return false;
+	}
+
+	@Override
+	public List<Vendedor> getAllLicenced() {
+		
+		List<Vendedor> list = new ArrayList<Vendedor>();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where requisit = :requisit");
+		query.setParameter("requisit", 1);
+		if (query.getResultList().size() >= 1) {
+			list = (List<Vendedor>) query.getResultList();
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Vendedor> getAllRequisit() {
+		
+		List<Vendedor> list = new ArrayList<Vendedor>();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where requisit = :requisit");
+		query.setParameter("requisit", 0);
+		if (query.getResultList().size() >= 1) {
+			list = (List<Vendedor>) query.getResultList();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Vendedor getById(int id) {
+		
+		Vendedor v = new Vendedor();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where idVendedor = :id");
+		query.setParameter("id", id);
+		if (query.getResultList().size() >= 1) {
+			v = (Vendedor) query.getResultList().get(0);
+		}
+
+		return v;
 	}
 
 }

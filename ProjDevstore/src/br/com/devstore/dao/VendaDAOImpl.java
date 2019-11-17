@@ -31,4 +31,10 @@ public class VendaDAOImpl implements VendaDAO{
 		return false;
 	}
 
+	@Override
+	public Venda getVendaByIdVendedor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

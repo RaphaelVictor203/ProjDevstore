@@ -17,7 +17,7 @@ public class Vendedor {
 	private String email;
 	private String CPF;
 	private Endereco endereco;
-	private boolean isRequisit;
+	private int isRequisit = 0;
 	
 	@Id
 	public int getIdVendedor() {
@@ -79,10 +79,10 @@ public class Vendedor {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public boolean isRequisit() {
+	public int isRequisit() {
 		return isRequisit;
 	}
-	public void setRequisit(boolean isRequisit) {
+	public void setRequisit(int isRequisit) {
 		this.isRequisit = isRequisit;
 	}
 	
