@@ -1,25 +1,37 @@
 package br.com.devstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name = "VND_SEQ", sequenceName = "VENDEDOR_SEQ", initialValue = 1, allocationSize = 1)
 public class Vendedor {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VND_SEQ")
 	private int idVendedor;
 	private String nomeCompleto;
 	private String razaoSocial;
 	private String CNPJ;
-	//private Licenca licenca;
-	private Long telefone;
+	private String telefone;
 	private String email;
 	private String CPF;
+	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Endereco.class, fetch=FetchType.EAGER)
+	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
-	private int isRequisit = 0;
+
+	//private Licenca licenca;
+	//private int isRequisit = 0;
+
 	
-	@Id
+
 	public int getIdVendedor() {
 		return idVendedor;
 	}
@@ -41,8 +53,9 @@ public class Vendedor {
 	public String getCNPJ() {
 		return CNPJ;
 	}
-	public void setCNPJ(String string) {
-		CNPJ = string;
+
+	public void setCNPJ(String CNPJ) {
+		this.CNPJ = CNPJ;
 	}
 	
 	/*
@@ -53,10 +66,11 @@ public class Vendedor {
 	public void setLicenca(Licenca licenca) {
 		this.licenca = licenca;
 	}*/
-	public Long getTelefone() {
+
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(Long telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getEmail() {
@@ -71,22 +85,20 @@ public class Vendedor {
 	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
-	
-	@ManyToOne
 	public Endereco getEndereco() {
 		return endereco;
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public int isRequisit() {
+
+	/*
+  public int isRequisit() {
 		return isRequisit;
 	}
 	public void setRequisit(int isRequisit) {
 		this.isRequisit = isRequisit;
 	}
-	
-	
-	
+  */
 	
 }
