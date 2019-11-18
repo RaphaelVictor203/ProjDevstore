@@ -26,7 +26,7 @@ body {
 			</strong>
 			<div class="card-body rounded bg-white"
 				style="background-color: #F0FFF0">
-				<form id="form_CAD_Vendedor" action="" method="post">
+				<form id="form_CAD_Vendedor" action="/ProjDevstore/vendedor/cadastrar" method="post">
 					<div class="row mb-2">
 						<div class=col-8>
 							<input type="text" class="form-control" name="txtNomeCompleto"
@@ -112,8 +112,10 @@ body {
 					</div>
 					<div class="row mb-5">
 						<div class="col justify-contend-end">
-						<input type="button" value="Cancelar" onclick="location.href='/ProjDevstore/'" class="btn btn-danger btn-lg">
-							<input type="submit" value="Cadastrar" name="btnCadastrar" Class="btn btn-primary btn-lg">
+							<input type="button" value="Cancelar" onclick="location.href='/ProjDevstore/'" class="btn btn-danger btn-lg"> 
+								<input type="submit"
+								value="Cadastrar" name="btnCadastrar"
+								Class="btn btn-primary btn-lg">
 						</div>
 					</div>
 				</form>

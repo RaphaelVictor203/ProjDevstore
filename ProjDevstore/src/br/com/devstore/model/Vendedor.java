@@ -1,25 +1,34 @@
 package br.com.devstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name = "VND_SEQ", sequenceName = "VENDEDOR_SEQ", initialValue = 1, allocationSize = 1)
 public class Vendedor {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VND_SEQ")
 	private int idVendedor;
 	private String nomeCompleto;
 	private String razaoSocial;
-	private int CNPJ;
-	//private Licenca licenca;
-	private int telefone;
+	private String CNPJ;
+	//private Licenca lice]nca;
+	private String telefone;
 	private String email;
-	private int CPF;
+	private String CPF;
+	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Endereco.class, fetch=FetchType.EAGER)
+	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
-	private boolean isRequisit;
 	
-	@Id
+
 	public int getIdVendedor() {
 		return idVendedor;
 	}
@@ -38,10 +47,10 @@ public class Vendedor {
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
 	}
-	public int getCNPJ() {
+	public String getCNPJ() {
 		return CNPJ;
 	}
-	public void setCNPJ(int cNPJ) {
+	public void setCNPJ(String cNPJ) {
 		CNPJ = cNPJ;
 	}
 	
@@ -53,10 +62,10 @@ public class Vendedor {
 	public void setLicenca(Licenca licenca) {
 		this.licenca = licenca;
 	}*/
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getEmail() {
@@ -65,28 +74,17 @@ public class Vendedor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(int cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
-	
-	@ManyToOne
 	public Endereco getEndereco() {
 		return endereco;
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public boolean isRequisit() {
-		return isRequisit;
-	}
-	public void setRequisit(boolean isRequisit) {
-		this.isRequisit = isRequisit;
-	}
-	
-	
-	
-	
+
 }
