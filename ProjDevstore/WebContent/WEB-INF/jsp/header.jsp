@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.com.devstore.model.Vendedor"%>
 <%@page import="br.com.devstore.model.Cliente"%>
+<%@page import="br.com.devstore.model.Licenca"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,9 +75,11 @@
 			session.setAttribute("senha", c.getSenha());
 			session.setAttribute("dist", 74);
 		}else{
+			Licenca l = new Licenca();
 			v = (Vendedor) session.getAttribute("usuarioLogado");
-			//session.setAttribute("login", v.get.getNomeUsuario());
-			//session.setAttribute("senha", v.getSenha());
+			l = (Licenca) session.getAttribute("licenca");
+			session.setAttribute("login", l.getUsuario());
+			session.setAttribute("senha", l.getSenha());
 			session.setAttribute("dist", 67);
 		}
 	}
@@ -102,10 +105,18 @@
 	        <a class="nav-link" href="#">Cupons</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Pedidos</a>
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor?tl=1'">Pedidos</a>
 	      </li>
 	    </ul>
-	  <%}} %>
+	  <%}else
+	  if(session.getAttribute("tipoUsuario").toString().equals("gerente")){%>
+		<ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Licencas<span class="sr-only">(página atual)</span></a>
+	      </li>
+	    </ul> 
+	  <%} 
+	  }%>
 	  <% if(isLogged){%>
 		  <div class="row" style="margin-left: ${dist}%">
 		  		<%if(session.getAttribute("tipoUsuario").toString().equals("cliente")){%>
@@ -119,7 +130,11 @@
 						    Configurações
 						  </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						  	<a class="dropdown-item" onclick="location.href='/ProjDevstore/cliente/perfil?usr=${login}&senha=${senha}'">Atualizar perfil</a>
+						  	<% if(session.getAttribute("tipoUsuario").toString().equals("cliente")){ %>
+						  		<a class="dropdown-item" onclick="location.href='/ProjDevstore/cliente/perfil?usr=${login}&senha=${senha}'">Atualizar perfil</a>
+						  	<% }else{ %>
+						  		<a class="dropdown-item" onclick="location.href='/ProjDevstore/vendedor/perfil?usr=${login}&senha=${senha}'">Atualizar perfil</a>
+						  	<% } %>
 						    <a class="dropdown-item" onclick="location.href='/ProjDevstore/login/logout'">Logout</a>
 						  </div>
 					</div>

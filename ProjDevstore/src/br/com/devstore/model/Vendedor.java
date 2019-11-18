@@ -20,13 +20,16 @@ public class Vendedor {
 	private String nomeCompleto;
 	private String razaoSocial;
 	private String CNPJ;
-	//private Licenca lice]nca;
 	private String telefone;
 	private String email;
 	private String CPF;
 	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Endereco.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
+
+	//private Licenca licenca;
+	//private int isRequisit = 0;
+
 	
 
 	public int getIdVendedor() {
@@ -50,8 +53,9 @@ public class Vendedor {
 	public String getCNPJ() {
 		return CNPJ;
 	}
-	public void setCNPJ(String cNPJ) {
-		CNPJ = cNPJ;
+
+	public void setCNPJ(String CNPJ) {
+		this.CNPJ = CNPJ;
 	}
 	
 	/*
@@ -62,6 +66,7 @@ public class Vendedor {
 	public void setLicenca(Licenca licenca) {
 		this.licenca = licenca;
 	}*/
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -87,4 +92,13 @@ public class Vendedor {
 		this.endereco = endereco;
 	}
 
+	/*
+  public int isRequisit() {
+		return isRequisit;
+	}
+	public void setRequisit(int isRequisit) {
+		this.isRequisit = isRequisit;
+	}
+  */
+	
 }

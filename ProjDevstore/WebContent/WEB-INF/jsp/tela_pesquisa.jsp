@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Set"%>
 <%@page import="br.com.devstore.dao.ProdutoDAOImpl"%>
 <%@page import="br.com.devstore.dao.ProdutoDAO"%>
@@ -15,6 +16,11 @@
 </head>
 
 <%
+
+	NumberFormat nf = NumberFormat.getInstance();
+	
+	nf.setMaximumFractionDigits(2);
+	nf.setMinimumFractionDigits(2);
 
 	ProdutoDAO pDAO = new ProdutoDAOImpl();
 	List<Produto> produtoList = new ArrayList<Produto>();
@@ -95,14 +101,14 @@
 			</form>
 		</div>
 		
-		<div class="d-flex row-12 justify-content-between" style="flex-wrap: wrap;">
+		<div class="d-flex row-12" style="flex-wrap: wrap; padding-left: .1em">
 			<% 
 				if(produtoList.size() > 0){
 					for(Produto pr : produtoList){ 
 							request.setAttribute("nomeProduto", pr.getNomeProduto());
 							//request.setAttribute("fabricante", pr.getFabricante());
 							request.setAttribute("preco", pr.getPreco());%>
-						<div class="card mb-3" style="width: 17rem; float: left;">
+						<div class="card mb-3" style="width: 17rem; float: left; margin-left: .30em">
 						  <img class="card-img-top" src=".../100px180/" alt=" " style="width: 100%; height: 18em; background-color: gray">
 						  <div class="card-body">
 						  	<div class="row mb-1">
@@ -110,7 +116,7 @@
 						    		<a href="#"><h5 class="card-title">${nomeProduto}</h5></a>
 						    	</div>
 						    	<div class="col">
-						    		<h5 class="card-text text-secondary text-right">R$ ${preco}0</h5>
+						    		<h5 class="card-text text-secondary text-right">R$ <%= nf.format(pr.getPreco()) %></h5>
 						    	</div>
 						    </div>
 						    <div class="row">
