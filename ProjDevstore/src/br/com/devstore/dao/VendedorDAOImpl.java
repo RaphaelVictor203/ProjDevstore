@@ -83,7 +83,7 @@ public class VendedorDAOImpl implements VendedorDAO {
 			em.getTransaction().begin();
 			vendedor = em.find(Vendedor.class, vendedor.getIdVendedor());
 			em.remove(vendedor);
-			em.getTransaction().commit();
+			em.getTransaction().commit(); 
 			
 		} catch (Exception ex) {
 		   ex.getMessage();
