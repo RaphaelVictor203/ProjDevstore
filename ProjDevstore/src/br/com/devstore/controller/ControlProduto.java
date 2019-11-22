@@ -37,4 +37,9 @@ public class ControlProduto {
 		return new ModelAndView("tela_pesquisa");
     }
 	
+	@RequestMapping("/cadastro")
+	public ModelAndView cadastro(HttpServletRequest request , HttpServletResponse response) {
+		return new ModelAndView("cadastro_produto");
+	}
+	
 }
