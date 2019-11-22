@@ -71,7 +71,6 @@ public class ControlVendedor {
 
 					vendedor.setEndereco(endereco);
 					vendedorDAO.inserir(vendedor);
-
 				}
 
 			} catch (Exception e) {
