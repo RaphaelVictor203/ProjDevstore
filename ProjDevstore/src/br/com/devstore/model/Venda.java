@@ -49,11 +49,11 @@ public class Venda {
 		this.cliente = cliente;
 	}
 	
-	public Date getDataValidade() {
+	public Date getDataVenda() {
 		return dataVenda;
 	}
-	public void setDataValidade(Date dataValidade) {
-		this.dataVenda = dataValidade;
+	public void setDataVenda(Date dataVenda) {
+		this.dataVenda = dataVenda;
 	}
 	public String getFormaPagto() {
 		return formaPagto;

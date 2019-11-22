@@ -7,16 +7,26 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<title>Gerenciamento Vendedor</title>
 </head>
+
+<%
+
+	int tela = -1;
+
+	if(request.getParameter("tl") != null){
+		tela = Integer.parseInt(request.getParameter("tl"));	
+	}
+
+%>
+
 <body style="background-color: #F5F5F5">
 
 	<jsp:include page="header.jsp" />
 	
-	<!-- conteudo -->
-	<div class="container">
-		<div class="row-12 justify-content-center">
-			
-		</div>
-	</div>
+	<% if(tela == 1){ %>
+	
+		<jsp:include page="tela_pedidos.jsp" />
+	
+	<%} %>
 	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,5 +1,8 @@
 package br.com.devstore.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,11 +23,12 @@ public class VendedorDAOImpl implements VendedorDAO {
 	}
 
 	@Override
-	public Vendedor login(String usuario, String senha) {
+	public Licenca login(String usuario, String senha) {
 
 		System.out.println("User: " + usuario + " - Senha: " + senha);
 
-		Vendedor v = null;
+
+		//Vendedor v = null;
 
 		Licenca l = null;
 
@@ -35,8 +39,77 @@ public class VendedorDAOImpl implements VendedorDAO {
 		query.setParameter("senha", senha);
 		if (query.getResultList().size() >= 1) {
 			l = (Licenca) query.getResultList().get(0);
-			v = l.getVendedor();
-			System.out.println("Vendedor capturado: " + v.getNomeCompleto());
+			//v = l.getVendedor();
+			//System.out.println("Vendedor capturado: " + v.getNomeCompleto());
+		}
+
+		return l;
+	}
+	
+	@Override
+	public boolean alterar(Vendedor vendedor) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			
+			em.getTransaction().begin();
+			em.merge(vendedor);
+			em.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.getStackTrace();
+			em.getTransaction().rollback();
+		}finally{
+			em.close();				
+		}
+		return false;
+	}
+
+	@Override
+	public List<Vendedor> getAllLicenced() {
+		
+		List<Vendedor> list = new ArrayList<Vendedor>();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where requisit = :requisit");
+		query.setParameter("requisit", 1);
+		if (query.getResultList().size() >= 1) {
+			list = (List<Vendedor>) query.getResultList();
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Vendedor> getAllRequisit() {
+		
+		List<Vendedor> list = new ArrayList<Vendedor>();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where requisit = :requisit");
+		query.setParameter("requisit", 0);
+		if (query.getResultList().size() >= 1) {
+			list = (List<Vendedor>) query.getResultList();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Vendedor getById(int id) {
+		
+		Vendedor v = new Vendedor();
+
+		EntityManager em = emf.createEntityManager();
+
+		Query query = (Query) em
+				.createQuery("from Vendedor where idVendedor = :id");
+		query.setParameter("id", id);
+		if (query.getResultList().size() >= 1) {
+			v = (Vendedor) query.getResultList().get(0);
 		}
 
 		return v;

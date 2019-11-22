@@ -1,5 +1,6 @@
 
 
+<%@page import="java.text.NumberFormat"%>
 <%@page import="br.com.devstore.dao.ProdutoDAOImpl"%>
 <%@page import="br.com.devstore.dao.ProdutoDAO"%>
 <%@page import="java.util.*"%>
@@ -15,7 +16,12 @@
 </head>
 
 <%
+
+	NumberFormat nf = NumberFormat.getInstance();
 	
+	nf.setMaximumFractionDigits(2);
+	nf.setMinimumFractionDigits(2);
+
 	ProdutoDAO pDAO = new ProdutoDAOImpl();
 	List<Produto> produtoList = new ArrayList<Produto>();
 	produtoList = pDAO.pesquisarTodos();
@@ -57,7 +63,7 @@
 	<!-- conteudo -->
 	<div class="container">
 		<div class="row-12 mb-5">
-			<div id="carousel" class="carousel slide" data-ride="carousel" style="background-color: red; height: 26em;">
+			<div id="carousel" class="carousel slide bg-secondary" data-ride="carousel" style="height: 26em;">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
 			      <img class="d-block w-100 h-100" src=".../800x400?auto=yes&bg=777&fg=555&text=Primeiro Slide" alt="Primeiro Slide">
@@ -110,7 +116,7 @@
 		<div class="row-12">
 			<strong><h4 class="card-title mt-5 text-dark">Produtos em destaque</h4></strong>
 		</div>
-		<div class="d-flex row-12 justify-content-between" style="flex-wrap: wrap;">
+		<div class="d-flex row-12" style="flex-wrap: wrap; padding-left: .1em">
 		
 			<% 
 				if(produtoList.size() > 0){
@@ -118,7 +124,7 @@
 							request.setAttribute("nomeProduto", pr.getNomeProduto());
 							//request.setAttribute("fabricante", pr.getFabricante());
 							request.setAttribute("preco", pr.getPreco());%>
-						<div class="card mb-3" style="width: 17rem; float: left;">
+						<div class="card mb-3" style="width: 17rem; float: left; margin-left: .30em">
 						  <img class="card-img-top" src=".../100px180/" alt=" " style="width: 100%; height: 18em; background-color: gray">
 						  <div class="card-body">
 						  	<div class="row mb-1">
@@ -126,12 +132,13 @@
 						    		<a href="#"><h5 class="card-title">${nomeProduto}</h5></a>
 						    	</div>
 						    	<div class="col">
-						    		<h5 class="card-text text-secondary text-right">R$ ${preco}0</h5>
+						    		<h5 class="card-text text-secondary text-right">R$ <%= nf.format(pr.getPreco())%></h5>
 						    	</div>
 						    </div>
 						    <div class="row">
 						    	<div class="col">
 						    		<div class="input-group">
+						    		
 						    		  <form action="/ProjDevstore/carrinho/adicionar?id=<%= pr.getIdProduto() %>&lc=0" method="POST">
 						    		  	<div class="row">
 						    		  		<div class="w-50 pl-3">
