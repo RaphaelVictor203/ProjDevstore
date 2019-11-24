@@ -1,6 +1,8 @@
 package br.com.devstore.dao;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -105,6 +107,30 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		}
 		
 		return p;
+	}
+
+	@Override
+	public boolean insert(Produto p) {
+		try {
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(p);
+			em.getTransaction().commit();
+			em.close();
+			
+			/*Connection con = ConnectionManager.getInstance().getConnection();
+			String query = "insert into produto(idProduto, descricao, informacoes, nomeProduto"
+					+ ", preco, tipo_idProduto) values ()";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setLong(1, l.getIdLicenca());
+			stmt.executeUpdate();
+			con.close();*/
+			
+			return true;
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return false;
 	}
 
 }

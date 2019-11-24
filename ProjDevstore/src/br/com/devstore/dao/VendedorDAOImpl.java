@@ -45,24 +45,6 @@ public class VendedorDAOImpl implements VendedorDAO {
 
 		return l;
 	}
-	
-	@Override
-	public boolean alterar(Vendedor vendedor) {
-		EntityManager em = emf.createEntityManager();
-		try {
-			
-			em.getTransaction().begin();
-			em.merge(vendedor);
-			em.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			e.getStackTrace();
-			em.getTransaction().rollback();
-		}finally{
-			em.close();				
-		}
-		return false;
-	}
 
 	@Override
 	public List<Vendedor> getAllLicenced() {
@@ -72,8 +54,8 @@ public class VendedorDAOImpl implements VendedorDAO {
 		EntityManager em = emf.createEntityManager();
 
 		Query query = (Query) em
-				.createQuery("from Vendedor where requisit = :requisit");
-		query.setParameter("requisit", 1);
+				.createQuery("from Vendedor where isRequisit = :isRequisit");
+		query.setParameter("isRequisit", 1);
 		if (query.getResultList().size() >= 1) {
 			list = (List<Vendedor>) query.getResultList();
 		}
@@ -89,8 +71,8 @@ public class VendedorDAOImpl implements VendedorDAO {
 		EntityManager em = emf.createEntityManager();
 
 		Query query = (Query) em
-				.createQuery("from Vendedor where requisit = :requisit");
-		query.setParameter("requisit", 0);
+				.createQuery("from Vendedor where isRequisit = :isRequisit");
+		query.setParameter("isRequisit", 0);
 		if (query.getResultList().size() >= 1) {
 			list = (List<Vendedor>) query.getResultList();
 		}

@@ -26,6 +26,11 @@
 	
 		<jsp:include page="tela_pedidos.jsp" />
 	
+	<%}else
+	  if(tela == 2){%>
+	  
+	  	<jsp:include page="tela_manter_produtos.jsp" />
+	  
 	<%} %>
 	
 	

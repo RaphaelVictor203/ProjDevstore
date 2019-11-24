@@ -11,5 +11,6 @@ public interface ProdutoDAO {
 	public List<Produto> pesquisarTodos();
 	public Produto pesquisarById(int id);
 	public List<Produto> pesquisaEspecifica(int tipo, int faixa, String nomeProduto);
+	public boolean insert(Produto p);
 	
 }

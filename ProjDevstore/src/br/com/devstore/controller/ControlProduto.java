@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.devstore.dao.ProdutoDAO;
 import br.com.devstore.dao.ProdutoDAOImpl;
 import br.com.devstore.model.Produto;
+import br.com.devstore.model.Tag;
+import br.com.devstore.model.Tipo;
+import br.com.devstore.model.Vendedor;
 
 @Controller
 @RequestMapping("/produto")
@@ -41,5 +44,59 @@ public class ControlProduto {
 	public ModelAndView cadastro(HttpServletRequest request , HttpServletResponse response) {
 		return new ModelAndView("cadastro_produto");
 	}
+	
+	@RequestMapping("/produtos")
+    public ModelAndView produtos(HttpServletRequest request, HttpServletResponse response){
+		
+		return new ModelAndView("tela_manter_produtos");
+		
+    }
+	
+	@RequestMapping("/cadastrar")
+    public ModelAndView cadastrar(HttpServletRequest request, HttpServletResponse response){
+		
+		ProdutoDAO pDAO = new ProdutoDAOImpl();
+		
+		Produto p = new Produto();
+		p.setNomeProduto(request.getParameter("txtNomeProduto"));
+		p.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
+		p.setQntd(Integer.parseInt(request.getParameter("txtQntdProduto")));
+		p.setDescricao(request.getParameter("descricao"));
+		p.setInformacoes(request.getParameter("informacoes"));
+		
+		
+		System.out.println("TIPO: " + request.getParameter("sltTipo"));
+		
+		Tipo tp = new Tipo();
+		tp.setIdTipo(Integer.parseInt(request.getParameter("sltTipo")));
+		
+		p.setTipo(tp);
+		
+		List<Tag> tagsList = new ArrayList<Tag>();
+		String[] tags = request.getParameter("tags").split(";");
+		
+		for(int i=0; i<tags.length; i++){
+			Tag t = new Tag();
+			t.setNomeTag(tags[i]);
+			tagsList.add(t);
+		}
+		
+		p.setTags(tagsList);
+		
+		Vendedor v = (Vendedor) request.getSession().getAttribute("usuarioLogado");
+		
+		p.setVendedor(v);
+		
+		System.out.println("TAMANHO: " + tags.length);
+		
+		//request.getParameter("txtNomeCompleto");
+		
+		pDAO.insert(p);
+		
+		return new ModelAndView("tela_manter_produtos");
+		
+    }
+	
+	
 	
 }

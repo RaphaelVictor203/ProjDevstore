@@ -2,7 +2,9 @@ package br.com.devstore.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class Produto {
 	private List<Feedback> feedbacks;
 	private List<Tag> tags;
 	private Vendedor vendedor;
+	private int qntd;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_SEQ")
@@ -73,7 +76,7 @@ public class Produto {
 		this.preco = preco;
 	}
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL, targetEntity=Tag.class, fetch=FetchType.EAGER)
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -87,6 +90,12 @@ public class Produto {
 	}
 	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
+	}
+	public int getQntd() {
+		return qntd;
+	}
+	public void setQntd(int qntd) {
+		this.qntd = qntd;
 	}
 	
 	

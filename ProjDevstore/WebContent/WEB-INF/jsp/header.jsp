@@ -99,13 +99,13 @@
 	  <% if(session.getAttribute("tipoUsuario").toString().equals("vendedor")){ %>
 	  	<ul class="navbar-nav">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Produtos<span class="sr-only">(página atual)</span></a>
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=2'">Produtos<span class="sr-only">(página atual)</span></a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#">Cupons</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor?tl=1'">Pedidos</a>
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=1'">Pedidos</a>
 	      </li>
 	    </ul>
 	  <%}else

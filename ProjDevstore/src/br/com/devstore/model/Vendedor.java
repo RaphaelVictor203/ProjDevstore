@@ -28,7 +28,7 @@ public class Vendedor {
 	private Endereco endereco;
 
 	//private Licenca licenca;
-	//private int isRequisit = 0;
+	private int isRequisit = 0;
 
 	
 
@@ -92,13 +92,12 @@ public class Vendedor {
 		this.endereco = endereco;
 	}
 
-	/*
+	
   public int isRequisit() {
 		return isRequisit;
 	}
 	public void setRequisit(int isRequisit) {
 		this.isRequisit = isRequisit;
 	}
-  */
 	
 }
