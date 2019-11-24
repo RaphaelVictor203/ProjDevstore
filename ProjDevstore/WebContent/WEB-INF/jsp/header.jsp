@@ -86,7 +86,7 @@
 	
 %>
 
-<body>
+<body style="z-index: 10">
 
 	<!-- Menu top -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
@@ -102,7 +102,7 @@
 	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=2'">Produtos<span class="sr-only">(página atual)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Cupons</a>
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=3'">Cupons</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=1'">Pedidos</a>

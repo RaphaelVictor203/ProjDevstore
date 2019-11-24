@@ -3,6 +3,7 @@ package br.com.devstore.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -129,6 +130,61 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			return true;
 		} catch (Exception e) {
 			e.getStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public List<Produto> pesquisarByIdVendedor(int id) {
+		EntityManager em = emf.createEntityManager();
+		
+		List<Produto> produtos = new ArrayList<Produto>();
+		
+		Query query = (Query) em.createQuery("from Produto where vendedor_idVendedor = :idVendedor");
+		query.setParameter("idVendedor",id);
+		
+		if(query.getResultList().size() >= 1){
+			produtos = (List<Produto>) query.getResultList();
+		}
+		
+		return produtos;
+	}
+
+	@Override
+	public boolean alterar(Produto p) {
+		try {
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.merge(p);
+			em.getTransaction().commit();
+			em.close();
+			
+			return true;
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		try {
+			Connection con = ConnectionManager.getInstance().getConnection();
+			
+			String query = "delete from produto_tag where Produto_idProduto = ?";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setLong(1, id);
+			stmt.executeUpdate();
+			
+			query = "delete from produto where idProduto = ?";
+			stmt = con.prepareStatement(query);
+			stmt.setLong(1, id);
+			stmt.executeUpdate();
+			
+			con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}

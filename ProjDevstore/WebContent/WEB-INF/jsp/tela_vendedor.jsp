@@ -15,6 +15,14 @@
 	if(request.getParameter("tl") != null){
 		tela = Integer.parseInt(request.getParameter("tl"));	
 	}
+	
+	if(request.getParameter("idP") != null){
+		session.setAttribute("idP", request.getParameter("idP"));
+	}
+	
+	if(request.getParameter("idC") != null){
+		session.setAttribute("idC", request.getParameter("idC"));
+	}
 
 %>
 
@@ -31,6 +39,10 @@
 	  
 	  	<jsp:include page="tela_manter_produtos.jsp" />
 	  
+	<%}else{ %>
+	
+		<jsp:include page="tela_cupons.jsp" />
+	
 	<%} %>
 	
 	

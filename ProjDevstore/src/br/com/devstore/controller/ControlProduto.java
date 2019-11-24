@@ -97,6 +97,59 @@ public class ControlProduto {
 		
     }
 	
+	@RequestMapping("/excluir")
+    public ModelAndView excluir(HttpServletRequest request, HttpServletResponse response){
+		
+		ProdutoDAO pDAO = new ProdutoDAOImpl();
+		
+		pDAO.delete(Integer.parseInt(request.getParameter("idP")));
+		
+		return new ModelAndView("tela_manter_produtos");
+		
+    }
+	
+	@RequestMapping("/alterar")
+    public ModelAndView alterar(HttpServletRequest request, HttpServletResponse response){
+		
+		ProdutoDAO pDAO = new ProdutoDAOImpl();
+		
+		Produto p1 = pDAO.pesquisarById(Integer.parseInt(request.getParameter("idP")));
+		
+		Produto p = new Produto();
+		p.setNomeProduto(request.getParameter("txtNomeProduto"));
+		p.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
+		p.setQntd(Integer.parseInt(request.getParameter("txtQntdProduto")));
+		p.setDescricao(request.getParameter("descricao"));
+		p.setInformacoes(request.getParameter("informacoes"));
+		p.setIdProduto(p1.getIdProduto());
+		
+		Tipo tp = new Tipo();
+		tp.setIdTipo(Integer.parseInt(request.getParameter("sltTipo")));
+		
+		p.setTipo(tp);
+		
+		List<Tag> tagsList = new ArrayList<Tag>();
+		String[] tags = request.getParameter("tags").split(";");
+		
+		for(int i=0; i<tags.length; i++){
+			Tag t = new Tag();
+			t.setNomeTag(tags[i]);
+			tagsList.add(t);
+		}
+		
+		p.setTags(tagsList);
+		
+		Vendedor v = (Vendedor) request.getSession().getAttribute("usuarioLogado");
+		
+		p.setVendedor(v);
+		
+		System.out.println("TAMANHO: " + tags.length);
+		
+		pDAO.alterar(p);
+		
+		return new ModelAndView("tela_manter_produtos");
+		
+    }
 	
 	
 }

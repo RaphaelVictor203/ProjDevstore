@@ -38,7 +38,7 @@
 
 %>
 
-<body style="background-color: #F5F5F5">
+<body>
 	
 	<!-- conteudo -->
 	<div class="container">
