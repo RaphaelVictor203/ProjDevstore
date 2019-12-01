@@ -93,7 +93,7 @@ public class ControlProduto {
 		
 		pDAO.insert(p);
 		
-		return new ModelAndView("tela_manter_produtos");
+		return new ModelAndView("tela_vendedor");
 		
     }
 	

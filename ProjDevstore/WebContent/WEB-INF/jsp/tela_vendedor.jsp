@@ -38,6 +38,11 @@
 	  if(tela == 2){%>
 	  
 	  	<jsp:include page="tela_manter_produtos.jsp" />
+	  	
+	<%}else
+	  if(tela == 4){%>
+	  
+	  	<jsp:include page="tela_relatorios.jsp" />
 	  
 	<%}else{ %>
 	

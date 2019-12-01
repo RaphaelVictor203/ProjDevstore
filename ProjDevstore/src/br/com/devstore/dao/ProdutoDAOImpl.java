@@ -3,6 +3,7 @@ package br.com.devstore.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ import javax.persistence.Query;
 import br.com.devstore.model.Cliente;
 import br.com.devstore.model.Licenca;
 import br.com.devstore.model.Produto;
+import br.com.devstore.model.TopVendas;
+import br.com.devstore.model.TotVendasCat;
+import br.com.devstore.model.TotVendasMes;
+import br.com.devstore.model.Venda;
 
 public class ProdutoDAOImpl implements ProdutoDAO{
 	
@@ -187,6 +192,86 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public List<TopVendas> pesquisarTop10ProdutosVendidos(int idVendedor) {
+		List<TopVendas> vendas = new ArrayList<TopVendas>();
+		try {
+			Connection con = ConnectionManager.getInstance().getConnection();
+			//String sql = "SELECT * from tbcliente where cpf like ?";
+			String sql = "select p.nomeProduto, COUNT(it.produto_idProduto) as qntd_vendas, SUM(it.subTotal)"
+						 + " as total_retornado from item as it inner join produto as p on p.idProduto = it.produto_idProduto"
+						 + " where p.vendedor_idVendedor = ? group by p.nomeProduto order by qntd_vendas DESC LIMIT 10";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idVendedor);
+			ResultSet  rs = stmt.executeQuery();		
+			while(rs.next()) {
+				TopVendas tv = new TopVendas();
+				tv.setNomeProduto(rs.getString("nomeProduto"));
+				tv.setQntd_vendas(rs.getInt("qntd_vendas"));
+				tv.setTotal_retornado(rs.getDouble("total_retornado"));
+				vendas.add(tv);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vendas;
+	}
+
+	@Override
+	public List<TotVendasCat> pesquisarTotalVendasPCategoria(int idVendedor) {
+		List<TotVendasCat> vendas = new ArrayList<TotVendasCat>();
+		try {
+			Connection con = ConnectionManager.getInstance().getConnection();
+			//String sql = "SELECT * from tbcliente where cpf like ?";
+			String sql = "select tp.nomeTipo as categoria, COUNT(it.produto_idProduto) as qntd_vendas, SUM(it.subTotal) "
+					+ " as total_retornado from item as it inner join produto as p on p.idProduto = it.produto_idProduto"
+					+ " inner join tipo as tp on tp.idTipo = p.tipo_idTipo where p.vendedor_idVendedor = ? group by tp.nomeTipo";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idVendedor);
+			ResultSet  rs = stmt.executeQuery();		
+			while(rs.next()) {
+				TotVendasCat tv = new TotVendasCat();
+				tv.setCategoria(rs.getString("categoria"));
+				tv.setQntd_vendas(rs.getInt("qntd_vendas"));
+				tv.setTotal_retornado(rs.getDouble("total_retornado"));
+				vendas.add(tv);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vendas;
+	}
+
+	@Override
+	public List<TotVendasMes> pesquisarTotalVendasPMes(int idVendedor) {
+		List<TotVendasMes> vendas = new ArrayList<TotVendasMes>();
+		try {
+			Connection con = ConnectionManager.getInstance().getConnection();
+			//String sql = "SELECT * from tbcliente where cpf like ?";
+			String sql = "select MONTH(v.datavenda) as mes_venda, COUNT(v.idVenda) as qntd_vendas, ("
+					+ "	select sum(it.subTotal) from venda_item as vi"
+					+ " inner join item as it on it.idItem = vi.itens_idItem"
+					+ " inner join venda as vd on vd.idVenda = vi.venda_idVenda"
+					+ " inner join produto as p on p.idProduto = it.produto_idProduto"
+					+ " where MONTH(vd.datavenda) = MONTH(v.dataVenda) and p.vendedor_idVendedor = ?"
+					+ " group by MONTH(vd.datavenda)) as total_recebido from venda as v group by mes_venda";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idVendedor);
+			ResultSet  rs = stmt.executeQuery();		
+			while(rs.next()) {
+				TotVendasMes tv = new TotVendasMes();
+				tv.setMes_venda(rs.getInt("mes_venda"));
+				tv.setQntd_vendas(rs.getInt("qntd_vendas"));
+				tv.setTotal_recebido(rs.getDouble("total_recebido"));
+				
+				vendas.add(tv);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vendas;
 	}
 
 }

@@ -80,7 +80,7 @@
 			l = (Licenca) session.getAttribute("licenca");
 			session.setAttribute("login", l.getUsuario());
 			session.setAttribute("senha", l.getSenha());
-			session.setAttribute("dist", 67);
+			session.setAttribute("dist", 62);
 		}
 	}
 	
@@ -106,6 +106,9 @@
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=1'">Pedidos</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" onclick="location.href='/ProjDevstore/vendedor/?tl=4'">Relatorios</a>
 	      </li>
 	    </ul>
 	  <%}else
